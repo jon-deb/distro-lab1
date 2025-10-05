@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/bo/CartHandler.java" value="98dd8c03-1ad6-4101-999c-43c4a014c640" />
+    <file url="file://$PROJECT_DIR$/src/main/java/db/CartDB.java" value="98dd8c03-1ad6-4101-999c-43c4a014c640" />
+    <file url="file://$PROJECT_DIR$/src/main/java/db/ItemDB.java" value="98dd8c03-1ad6-4101-999c-43c4a014c640" />
+    <file url="file://$PROJECT_DIR$/src/main/java/db/UserDB.java" value="98dd8c03-1ad6-4101-999c-43c4a014c640" />
+  </component>
+</project>
