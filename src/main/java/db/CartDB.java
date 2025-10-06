@@ -18,6 +18,13 @@ public class CartDB {
 
     private static final String updateStockQuery = "UPDATE ITEM SET stock = stock + ? WHERE itemID = ?";
 
+    /**
+     * Adds an item to the user's cart. Increases quantity if already present.
+     *
+     * @param user the user whose cart is updated
+     * @param item the item to add
+     * @return true if the operation succeeded, false otherwise
+     */
     public static boolean addItem(User user, ItemInfo item) {
         if (item == null || user == null) return false;
         int userID = user.getUserID();
@@ -55,8 +62,15 @@ public class CartDB {
         }
         return false;
     }
-
-    public static boolean removeItem(ItemInfo item, User user) {
+    /**
+     * Removes one unit of an item from the user's cart.
+     * If quantity is 1, removes the item entirely.
+     *
+     * @param item the item to remove
+     * @param user the user whose cart to update
+     * @return true if the operation succeeded, false otherwise
+     */
+    public static boolean removeItem(User user, ItemInfo item) {
         if (item == null || user == null) return false;
         int userID = user.getUserID();
         int itemID = item.getId();
@@ -84,7 +98,12 @@ public class CartDB {
             throw new RuntimeException("removeItem failed", e);
         }
     }
-
+    /**
+     * Calculates the total price of all items in the user's cart.
+     *
+     * @param user the user whose cart total is calculated
+     * @return total price of items in the cart
+     */
     public static double totalPrice(User user) {
         if (user == null) return 0.0;
         String cartTotal = """
@@ -106,7 +125,12 @@ public class CartDB {
         }
         return 0.0;
     }
-
+    /**
+     * Retrieves a map of item IDs and their corresponding quantities in the user's cart.
+     *
+     * @param user the user whose cart quantities are retrieved
+     * @return a map of item IDs to quantities
+     */
     public static Map<Integer, Integer> quantities(User user) {
         Map<Integer, Integer> map = new HashMap<>();
         if (user == null) return map;
@@ -127,7 +151,15 @@ public class CartDB {
         }
         return map;
     }
-
+    /**
+     * Sets the quantity of a specific item in the user's cart.
+     * Deletes the item if quantity is zero or less.
+     *
+     * @param user the user whose cart is updated
+     * @param itemId the ID of the item
+     * @param qty the new quantity
+     * @return true if the operation succeeded, false otherwise
+     */
     public static boolean setQty(User user, int itemId, int qty) {
         if (user == null || itemId < 1) return false;
         String sql = (qty <= 0)
@@ -147,7 +179,12 @@ public class CartDB {
         }
     }
 
-
+    /**
+     * Clears all items from the user's cart.
+     *
+     * @param user the user whose cart to clear
+     * @return true if the cart was cleared successfully, false otherwise
+     */
     public static boolean clear(User user) {
         if (user == null) return false;
         String sql = "DELETE FROM CART WHERE userID = ?";

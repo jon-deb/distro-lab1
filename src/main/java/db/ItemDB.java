@@ -18,7 +18,11 @@ public class ItemDB extends Item {
     private ItemDB(int itemID, String name, String desc, int stock, double price) {
         super(itemID, name, desc, stock, price);
     }
-
+    /**
+     * Retrieves all items from the ITEM table in the database.
+     *
+     * @return a Collection containing all items as ItemDB objects
+     */
     public static Collection searchAllItems() {
         Vector v = new Vector();
         try {

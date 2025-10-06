@@ -16,6 +16,14 @@ import java.util.List;
  * Uses shared connection from {@link DBManager}.
  */
 public class UserDB {
+
+    /**
+     * Checks if a user exists with the given username and password.
+     *
+     * @param username the user's username
+     * @param password the user's password
+     * @return a User object if a matching user exists; null otherwise
+     */
     public static User userExists(String username, String password) {
         String userLogin = "SELECT name, accessType, userID FROM USER WHERE name = ? AND password = ?";
 
@@ -42,7 +50,12 @@ public class UserDB {
 
         return null;
     }
-
+    /**
+     * Retrieves all items in the given user's cart, ordered by item name.
+     *
+     * @param user the user whose cart items are to be listed
+     * @return a list of ItemInfo objects representing the user's cart items
+     */
     public static List<ItemInfo> listUserItems(User user) {
         String fetchUserItems = """
             SELECT i.itemID, i.name, i.description, i.stock, i.price
